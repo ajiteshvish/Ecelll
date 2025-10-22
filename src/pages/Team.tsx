@@ -542,33 +542,37 @@ const Team = () => {
             </div>
 
             {/* Level 3 - All Teams (3 in a row) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12">
               {/* Treasurer */}
-              <div className="flex flex-col items-center">
-                <h3 className="text-lg font-semibold text-center mb-4 text-foreground">Treasurer</h3>
-                {renderTeamCard({ 
-                  id: 'treasurer', 
-                  name: 'Adarsh Patidar', 
-                  role: 'Treasurer', 
-                  image: '/team/IMG-20231109-WA0026 - Adarsh Patidar.jpg',
-                  email: 'adarsh.patidar@ecell.com',
-                  linkedin: 'https://linkedin.com/in/adarsh-patidar'
-                })}
+              <div className="bg-card/30 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:bg-card/50 transition-colors duration-300">
+                <h3 className="text-lg font-semibold text-center mb-6 text-foreground">Treasurer</h3>
+                <div className="flex justify-center">
+                  {renderTeamCard({ 
+                    id: 'treasurer', 
+                    name: 'Adarsh Patidar', 
+                    role: 'Treasurer', 
+                    image: '/team/IMG-20231109-WA0026 - Adarsh Patidar.jpg',
+                    email: 'adarsh.patidar@ecell.com',
+                    linkedin: 'https://linkedin.com/in/adarsh-patidar'
+                  })}
+                </div>
               </div>
 
               {/* Social Media Team */}
-              <div className="flex flex-col items-center">
-                <h3 className="text-lg font-semibold text-center mb-4 text-foreground">Social Media Team</h3>
+              <div className="bg-card/30 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:bg-card/50 transition-colors duration-300">
+                <h3 className="text-lg font-semibold text-center mb-6 text-foreground">Social Media Team</h3>
                 <div className="space-y-4">
-                  {renderTeamCard({ 
-                    id: 'sm-head', 
-                    name: 'Pooja Singh', 
-                    role: 'Head', 
-                    image: '/team/Screenshot_20250830-224455_Gallery - POOJA_ SINGH 10C.jpg',
-                    email: 'pooja.singh@ecell.com',
-                    linkedin: 'https://linkedin.com/in/pooja-singh'
-                  })}
-                  <div className="grid grid-cols-1 gap-3">
+                  <div className="flex justify-center">
+                    {renderTeamCard({ 
+                      id: 'sm-head', 
+                      name: 'Pooja Singh', 
+                      role: 'Head', 
+                      image: '/team/Screenshot_20250830-224455_Gallery - POOJA_ SINGH 10C.jpg',
+                      email: 'pooja.singh@ecell.com',
+                      linkedin: 'https://linkedin.com/in/pooja-singh'
+                    })}
+                  </div>
+                  <div className="grid grid-cols-1 gap-4">
                     {renderTeamCard({ 
                       id: 'sm-1', 
                       name: 'Tanishka Shrivastava', 
@@ -598,9 +602,9 @@ const Team = () => {
               </div>
 
               {/* Technical Team */}
-              <div className="flex flex-col items-center">
-                <h3 className="text-lg font-semibold text-center mb-4 text-foreground">Technical Team</h3>
-                <div className="grid grid-cols-1 gap-3">
+              <div className="bg-card/30 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:bg-card/50 transition-colors duration-300">
+                <h3 className="text-lg font-semibold text-center mb-6 text-foreground">Technical Team</h3>
+                <div className="grid grid-cols-1 gap-4">
                   {renderTeamCard({ 
                     id: 'tech-1', 
                     name: 'Ajitesh Vishwakarma', 
@@ -621,9 +625,9 @@ const Team = () => {
               </div>
 
               {/* Outreach & PR Team */}
-              <div className="flex flex-col items-center">
-                <h3 className="text-lg font-semibold text-center mb-4 text-foreground">Outreach & PR Team</h3>
-                <div className="grid grid-cols-1 gap-3">
+              <div className="bg-card/30 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:bg-card/50 transition-colors duration-300">
+                <h3 className="text-lg font-semibold text-center mb-6 text-foreground">Outreach & PR Team</h3>
+                <div className="grid grid-cols-1 gap-4">
                   {renderTeamCard({ 
                     id: 'pr-1', 
                     name: 'Khushi Soni', 
@@ -643,9 +647,9 @@ const Team = () => {
               </div>
 
               {/* Executive Team */}
-              <div className="flex flex-col items-center">
-                <h3 className="text-lg font-semibold text-center mb-4 text-foreground">Executive Team</h3>
-                <div className="grid grid-cols-1 gap-3">
+              <div className="bg-card/30 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:bg-card/50 transition-colors duration-300">
+                <h3 className="text-lg font-semibold text-center mb-6 text-foreground">Executive Team</h3>
+                <div className="grid grid-cols-1 gap-4">
                   {renderTeamCard({ 
                     id: 'exec-1', 
                     name: 'Ashish Sahu', 
@@ -666,9 +670,9 @@ const Team = () => {
               </div>
 
               {/* Logistic & Event Team */}
-              <div className="flex flex-col items-center">
-                <h3 className="text-lg font-semibold text-center mb-4 text-foreground">Logistic & Event Team</h3>
-                <div className="grid grid-cols-1 gap-3">
+              <div className="bg-card/30 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:bg-card/50 transition-colors duration-300">
+                <h3 className="text-lg font-semibold text-center mb-6 text-foreground">Logistic & Event Team</h3>
+                <div className="grid grid-cols-1 gap-4">
                   {renderTeamCard({ 
                     id: 'log-1', 
                     name: 'Tanu Agrawal', 
@@ -687,17 +691,19 @@ const Team = () => {
               </div>
 
               {/* Marketing Team */}
-              <div className="flex flex-col items-center">
-                <h3 className="text-lg font-semibold text-center mb-4 text-foreground">Marketing Team</h3>
+              <div className="bg-card/30 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:bg-card/50 transition-colors duration-300">
+                <h3 className="text-lg font-semibold text-center mb-6 text-foreground">Marketing Team</h3>
                 <div className="space-y-4">
-                  {renderTeamCard({ 
-                    id: 'mkt-head', 
-                    name: 'Aditi Harinkhere', 
-                    role: 'Head',
-                    email: 'aditi.harinkhere@ecell.com',
-                    linkedin: 'https://linkedin.com/in/aditi-harinkhere'
-                  })}
-                  <div className="grid grid-cols-1 gap-3">
+                  <div className="flex justify-center">
+                    {renderTeamCard({ 
+                      id: 'mkt-head', 
+                      name: 'Aditi Harinkhere', 
+                      role: 'Head',
+                      email: 'aditi.harinkhere@ecell.com',
+                      linkedin: 'https://linkedin.com/in/aditi-harinkhere'
+                    })}
+                  </div>
+                  <div className="grid grid-cols-1 gap-4">
                     {renderTeamCard({ 
                       id: 'mkt-1', 
                       name: 'Bhagyashree', 
@@ -719,18 +725,20 @@ const Team = () => {
               </div>
 
               {/* Content Creation Team */}
-              <div className="flex flex-col items-center">
-                <h3 className="text-lg font-semibold text-center mb-4 text-foreground">Content Creation Team</h3>
+              <div className="bg-card/30 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:bg-card/50 transition-colors duration-300">
+                <h3 className="text-lg font-semibold text-center mb-6 text-foreground">Content Creation Team</h3>
                 <div className="space-y-4">
-                  {renderTeamCard({ 
-                    id: 'content-head', 
-                    name: 'Shreya Shukla', 
-                    role: 'Head', 
-                    image: '/team/IMG_20250709_221727 - Shreya.jpg',
-                    email: 'shreya.shukla@ecell.com',
-                    linkedin: 'https://linkedin.com/in/shreya-shukla'
-                  })}
-                  <div className="grid grid-cols-1 gap-3">
+                  <div className="flex justify-center">
+                    {renderTeamCard({ 
+                      id: 'content-head', 
+                      name: 'Shreya Shukla', 
+                      role: 'Head', 
+                      image: '/team/IMG_20250709_221727 - Shreya.jpg',
+                      email: 'shreya.shukla@ecell.com',
+                      linkedin: 'https://linkedin.com/in/shreya-shukla'
+                    })}
+                  </div>
+                  <div className="grid grid-cols-1 gap-4">
                     {renderTeamCard({ 
                       id: 'content-1', 
                       name: 'Shaikh Asad UI Hasan', 
@@ -750,18 +758,20 @@ const Team = () => {
               </div>
 
               {/* Operation & Sponsorship Team */}
-              <div className="flex flex-col items-center">
-                <h3 className="text-lg font-semibold text-center mb-4 text-foreground">Operation & Sponsorship Team</h3>
+              <div className="bg-card/30 backdrop-blur-sm rounded-xl p-6 border border-border/50 hover:bg-card/50 transition-colors duration-300">
+                <h3 className="text-lg font-semibold text-center mb-6 text-foreground">Operation & Sponsorship Team</h3>
                 <div className="space-y-4">
-                  {renderTeamCard({ 
-                    id: 'ops-head', 
-                    name: 'Nishtha Deshmukh', 
-                    role: 'Head', 
-                    image: '/team/IMG_20241228_194931_113 - Nishtha Deshmukh.jpg',
-                    email: 'nishtha.deshmukh@ecell.com',
-                    linkedin: 'https://linkedin.com/in/nishtha-deshmukh'
-                  })}
-                  <div className="grid grid-cols-1 gap-3">
+                  <div className="flex justify-center">
+                    {renderTeamCard({ 
+                      id: 'ops-head', 
+                      name: 'Nishtha Deshmukh', 
+                      role: 'Head', 
+                      image: '/team/IMG_20241228_194931_113 - Nishtha Deshmukh.jpg',
+                      email: 'nishtha.deshmukh@ecell.com',
+                      linkedin: 'https://linkedin.com/in/nishtha-deshmukh'
+                    })}
+                  </div>
+                  <div className="grid grid-cols-1 gap-4">
                     {renderTeamCard({ 
                       id: 'ops-1', 
                       name: 'Rewansh Vaidya', 
