@@ -499,31 +499,16 @@ const Team = () => {
           </div>
         </section>
 
-        {/* Organizational Chart */}
-        <section className="py-8 sm:py-12 lg:py-16">
-          <div className="container mx-auto px-3 sm:px-4 lg:px-6">
-            <div className="bg-card/50 backdrop-blur-sm rounded-2xl shadow-lg p-6 sm:p-8 lg:p-12 border border-border/50">
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-center mb-8 sm:mb-12 text-foreground">
-                Organizational Structure
-              </h2>
-              <div className="flex justify-center overflow-x-auto">
-                {renderNode(organizationalChart.children[0])}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Team Members Grid */}
+        {/* Team Hierarchy */}
         <section className="py-8 sm:py-12 lg:py-16 bg-muted/30">
           <div className="container mx-auto px-3 sm:px-4 lg:px-6">
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-center mb-8 sm:mb-12 text-foreground">
               Meet Our Team
             </h2>
             
-            {/* Leadership Team */}
+            {/* Level 1 - President */}
             <div className="mb-12">
-              <h3 className="text-lg sm:text-xl font-semibold text-center mb-6 text-foreground">Leadership</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              <div className="flex justify-center">
                 {renderTeamCard({ 
                   id: 'president', 
                   name: 'Sarvesh Kumar', 
@@ -532,6 +517,12 @@ const Team = () => {
                   email: 'sarvesh.kumar@ecell.com',
                   linkedin: 'https://linkedin.com/in/sarvesh-kumar'
                 }, true)}
+              </div>
+            </div>
+
+            {/* Level 2 - VP and Secretary */}
+            <div className="mb-12">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
                 {renderTeamCard({ 
                   id: 'vp', 
                   name: 'Vraddhi Srivastava', 
@@ -547,6 +538,14 @@ const Team = () => {
                   email: 'shivam.mudgal@ecell.com',
                   linkedin: 'https://linkedin.com/in/shivam-mudgal'
                 }, true)}
+              </div>
+            </div>
+
+            {/* Level 3 - All Teams (3 in a row) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              {/* Treasurer */}
+              <div className="flex flex-col items-center">
+                <h3 className="text-lg font-semibold text-center mb-4 text-foreground">Treasurer</h3>
                 {renderTeamCard({ 
                   id: 'treasurer', 
                   name: 'Adarsh Patidar', 
@@ -554,181 +553,231 @@ const Team = () => {
                   image: '/team/IMG-20231109-WA0026 - Adarsh Patidar.jpg',
                   email: 'adarsh.patidar@ecell.com',
                   linkedin: 'https://linkedin.com/in/adarsh-patidar'
-                }, true)}
-              </div>
-            </div>
-
-            {/* Team Heads */}
-            <div className="mb-12">
-              <h3 className="text-lg sm:text-xl font-semibold text-center mb-6 text-foreground">Team Heads</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {renderTeamCard({ 
-                  id: 'sm-head', 
-                  name: 'Pooja Singh', 
-                  role: 'Social Media Head', 
-                  image: '/team/Screenshot_20250830-224455_Gallery - POOJA_ SINGH 10C.jpg',
-                  email: 'pooja.singh@ecell.com',
-                  linkedin: 'https://linkedin.com/in/pooja-singh'
-                })}
-                {renderTeamCard({ 
-                  id: 'mkt-head', 
-                  name: 'Aditi Harinkhere', 
-                  role: 'Marketing Head',
-                  email: 'aditi.harinkhere@ecell.com',
-                  linkedin: 'https://linkedin.com/in/aditi-harinkhere'
-                })}
-                {renderTeamCard({ 
-                  id: 'content-head', 
-                  name: 'Shreya Shukla', 
-                  role: 'Content Creator Head', 
-                  image: '/team/IMG_20250709_221727 - Shreya.jpg',
-                  email: 'shreya.shukla@ecell.com',
-                  linkedin: 'https://linkedin.com/in/shreya-shukla'
-                })}
-                {renderTeamCard({ 
-                  id: 'ops-head', 
-                  name: 'Nishtha Deshmukh', 
-                  role: 'Operation & Sponsorship Head', 
-                  image: '/team/IMG_20241228_194931_113 - Nishtha Deshmukh.jpg',
-                  email: 'nishtha.deshmukh@ecell.com',
-                  linkedin: 'https://linkedin.com/in/nishtha-deshmukh'
                 })}
               </div>
-            </div>
 
-            {/* Team Members */}
-            <div>
-              <h3 className="text-lg sm:text-xl font-semibold text-center mb-6 text-foreground">Team Members</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-                {renderTeamCard({ 
-                  id: 'sm-1', 
-                  name: 'Tanishka Shrivastava', 
-                  role: 'Graphic Designer', 
-                  image: '/team/IMG20250709192629 - Tanishka Shrivastava.jpg',
-                  email: 'tanishka.shrivastava@ecell.com',
-                  linkedin: 'https://linkedin.com/in/tanishka-shrivastava'
-                })}
-                {renderTeamCard({ 
-                  id: 'sm-2', 
-                  name: 'Khushi Jain', 
-                  role: 'Graphic Designer', 
-                  image: '/team/20250709_215825 - khushi jain.jpg',
-                  email: 'khushi.jain@ecell.com',
-                  linkedin: 'https://linkedin.com/in/khushi-jain'
-                })}
-                {renderTeamCard({ 
-                  id: 'sm-3', 
-                  name: 'Pushpendra Verma', 
-                  role: 'Video Editor', 
-                  image: '/team/IMG_20250902_202245 - Satyam Verman.jpg',
-                  email: 'pushpendra.verma@ecell.com',
-                  linkedin: 'https://linkedin.com/in/pushpendra-verma'
-                })}
-                {renderTeamCard({ 
-                  id: 'tech-1', 
-                  name: 'Ajitesh Vishwakarma', 
-                  role: 'Technical Team', 
-                  image: '/team/IMG_20250607_141840.jpg',
-                  email: 'ajitesh.vishwakarma@ecell.com',
-                  linkedin: 'https://linkedin.com/in/ajitesh-vishwakarma'
-                })}
-                {renderTeamCard({ 
-                  id: 'tech-2', 
-                  name: 'Shourya Gupta', 
-                  role: 'Technical Team', 
-                  image: '/team/WhatsApp Image 2025-04-26 at 13.01.33_ee20a3cb - Shourya Gupta.jpg',
-                  email: 'shourya.gupta@ecell.com',
-                  linkedin: 'https://linkedin.com/in/shourya-gupta'
-                })}
-                {renderTeamCard({ 
-                  id: 'pr-1', 
-                  name: 'Khushi Soni', 
-                  role: 'Outreach & PR Team', 
-                  image: '/team/IMG-20250709-WA0065 - Khushi Soni.jpg',
-                  email: 'khushi.soni@ecell.com',
-                  linkedin: 'https://linkedin.com/in/khushi-soni'
-                })}
-                {renderTeamCard({ 
-                  id: 'pr-2', 
-                  name: 'Shivam Kumar', 
-                  role: 'Outreach & PR Team',
-                  email: 'shivam.kumar@ecell.com',
-                  linkedin: 'https://linkedin.com/in/shivam-kumar'
-                })}
-                {renderTeamCard({ 
-                  id: 'exec-1', 
-                  name: 'Ashish Sahu', 
-                  role: 'Executive', 
-                  image: '/team/1 - Ashish Sahu.png',
-                  email: 'ashish.sahu@ecell.com',
-                  linkedin: 'https://linkedin.com/in/ashish-sahu'
-                })}
-                {renderTeamCard({ 
-                  id: 'exec-2', 
-                  name: 'Harsh Gupta', 
-                  role: 'Executive', 
-                  image: '/team/IMG20250815164131 - Harsh Gupta.jpg',
-                  email: 'harsh.gupta@ecell.com',
-                  linkedin: 'https://linkedin.com/in/harsh-gupta'
-                })}
-                {renderTeamCard({ 
-                  id: 'log-1', 
-                  name: 'Tanu Agrawal', 
-                  role: 'Logistic & Event Team',
-                  email: 'tanu.agrawal@ecell.com',
-                  linkedin: 'https://linkedin.com/in/tanu-agrawal'
-                })}
-                {renderTeamCard({ 
-                  id: 'log-2', 
-                  name: 'Vedant Sah', 
-                  role: 'Logistic & Event Team',
-                  email: 'vedant.sah@ecell.com',
-                  linkedin: 'https://linkedin.com/in/vedant-sah'
-                })}
-                {renderTeamCard({ 
-                  id: 'mkt-1', 
-                  name: 'Bhagyashree', 
-                  role: 'Marketing Team', 
-                  image: '/team/Camera-1231719718 - Mishu.jpg',
-                  email: 'bhagyashree@ecell.com',
-                  linkedin: 'https://linkedin.com/in/bhagyashree'
-                })}
-                {renderTeamCard({ 
-                  id: 'mkt-2', 
-                  name: 'Neha Sethiya', 
-                  role: 'Marketing Team', 
-                  image: '/team/20250709_234552 - Neha Sethiya.jpg',
-                  email: 'neha.sethiya@ecell.com',
-                  linkedin: 'https://linkedin.com/in/neha-sethiya'
-                })}
-                {renderTeamCard({ 
-                  id: 'content-1', 
-                  name: 'Shaikh Asad UI Hasan', 
-                  role: 'Videographer',
-                  email: 'asad.hasan@ecell.com',
-                  linkedin: 'https://linkedin.com/in/asad-hasan'
-                })}
-                {renderTeamCard({ 
-                  id: 'content-2', 
-                  name: 'Saloni Nema', 
-                  role: 'Photographer',
-                  email: 'saloni.nema@ecell.com',
-                  linkedin: 'https://linkedin.com/in/saloni-nema'
-                })}
-                {renderTeamCard({ 
-                  id: 'ops-1', 
-                  name: 'Rewansh Vaidya', 
-                  role: 'Operation & Sponsorship Team',
-                  email: 'rewansh.vaidya@ecell.com',
-                  linkedin: 'https://linkedin.com/in/rewansh-vaidya'
-                })}
-                {renderTeamCard({ 
-                  id: 'ops-2', 
-                  name: 'Devansh Shrivastava', 
-                  role: 'Operation & Sponsorship Team',
-                  email: 'devansh.shrivastava@ecell.com',
-                  linkedin: 'https://linkedin.com/in/devansh-shrivastava'
-                })}
+              {/* Social Media Team */}
+              <div className="flex flex-col items-center">
+                <h3 className="text-lg font-semibold text-center mb-4 text-foreground">Social Media Team</h3>
+                <div className="space-y-4">
+                  {renderTeamCard({ 
+                    id: 'sm-head', 
+                    name: 'Pooja Singh', 
+                    role: 'Head', 
+                    image: '/team/Screenshot_20250830-224455_Gallery - POOJA_ SINGH 10C.jpg',
+                    email: 'pooja.singh@ecell.com',
+                    linkedin: 'https://linkedin.com/in/pooja-singh'
+                  })}
+                  <div className="grid grid-cols-1 gap-3">
+                    {renderTeamCard({ 
+                      id: 'sm-1', 
+                      name: 'Tanishka Shrivastava', 
+                      role: 'Graphic Designer', 
+                      image: '/team/IMG20250709192629 - Tanishka Shrivastava.jpg',
+                      email: 'tanishka.shrivastava@ecell.com',
+                      linkedin: 'https://linkedin.com/in/tanishka-shrivastava'
+                    })}
+                    {renderTeamCard({ 
+                      id: 'sm-2', 
+                      name: 'Khushi Jain', 
+                      role: 'Graphic Designer', 
+                      image: '/team/20250709_215825 - khushi jain.jpg',
+                      email: 'khushi.jain@ecell.com',
+                      linkedin: 'https://linkedin.com/in/khushi-jain'
+                    })}
+                    {renderTeamCard({ 
+                      id: 'sm-3', 
+                      name: 'Pushpendra Verma', 
+                      role: 'Video Editor', 
+                      image: '/team/IMG_20250902_202245 - Satyam Verman.jpg',
+                      email: 'pushpendra.verma@ecell.com',
+                      linkedin: 'https://linkedin.com/in/pushpendra-verma'
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              {/* Technical Team */}
+              <div className="flex flex-col items-center">
+                <h3 className="text-lg font-semibold text-center mb-4 text-foreground">Technical Team</h3>
+                <div className="grid grid-cols-1 gap-3">
+                  {renderTeamCard({ 
+                    id: 'tech-1', 
+                    name: 'Ajitesh Vishwakarma', 
+                    role: 'Technical Team', 
+                    image: '/team/IMG_20250607_141840.jpg',
+                    email: 'ajitesh.vishwakarma@ecell.com',
+                    linkedin: 'https://linkedin.com/in/ajitesh-vishwakarma'
+                  })}
+                  {renderTeamCard({ 
+                    id: 'tech-2', 
+                    name: 'Shourya Gupta', 
+                    role: 'Technical Team', 
+                    image: '/team/WhatsApp Image 2025-04-26 at 13.01.33_ee20a3cb - Shourya Gupta.jpg',
+                    email: 'shourya.gupta@ecell.com',
+                    linkedin: 'https://linkedin.com/in/shourya-gupta'
+                  })}
+                </div>
+              </div>
+
+              {/* Outreach & PR Team */}
+              <div className="flex flex-col items-center">
+                <h3 className="text-lg font-semibold text-center mb-4 text-foreground">Outreach & PR Team</h3>
+                <div className="grid grid-cols-1 gap-3">
+                  {renderTeamCard({ 
+                    id: 'pr-1', 
+                    name: 'Khushi Soni', 
+                    role: 'Outreach & PR Team', 
+                    image: '/team/IMG-20250709-WA0065 - Khushi Soni.jpg',
+                    email: 'khushi.soni@ecell.com',
+                    linkedin: 'https://linkedin.com/in/khushi-soni'
+                  })}
+                  {renderTeamCard({ 
+                    id: 'pr-2', 
+                    name: 'Shivam Kumar', 
+                    role: 'Outreach & PR Team',
+                    email: 'shivam.kumar@ecell.com',
+                    linkedin: 'https://linkedin.com/in/shivam-kumar'
+                  })}
+                </div>
+              </div>
+
+              {/* Executive Team */}
+              <div className="flex flex-col items-center">
+                <h3 className="text-lg font-semibold text-center mb-4 text-foreground">Executive Team</h3>
+                <div className="grid grid-cols-1 gap-3">
+                  {renderTeamCard({ 
+                    id: 'exec-1', 
+                    name: 'Ashish Sahu', 
+                    role: 'Executive', 
+                    image: '/team/1 - Ashish Sahu.png',
+                    email: 'ashish.sahu@ecell.com',
+                    linkedin: 'https://linkedin.com/in/ashish-sahu'
+                  })}
+                  {renderTeamCard({ 
+                    id: 'exec-2', 
+                    name: 'Harsh Gupta', 
+                    role: 'Executive', 
+                    image: '/team/IMG20250815164131 - Harsh Gupta.jpg',
+                    email: 'harsh.gupta@ecell.com',
+                    linkedin: 'https://linkedin.com/in/harsh-gupta'
+                  })}
+                </div>
+              </div>
+
+              {/* Logistic & Event Team */}
+              <div className="flex flex-col items-center">
+                <h3 className="text-lg font-semibold text-center mb-4 text-foreground">Logistic & Event Team</h3>
+                <div className="grid grid-cols-1 gap-3">
+                  {renderTeamCard({ 
+                    id: 'log-1', 
+                    name: 'Tanu Agrawal', 
+                    role: 'Logistic & Event Team',
+                    email: 'tanu.agrawal@ecell.com',
+                    linkedin: 'https://linkedin.com/in/tanu-agrawal'
+                  })}
+                  {renderTeamCard({ 
+                    id: 'log-2', 
+                    name: 'Vedant Sah', 
+                    role: 'Logistic & Event Team',
+                    email: 'vedant.sah@ecell.com',
+                    linkedin: 'https://linkedin.com/in/vedant-sah'
+                  })}
+                </div>
+              </div>
+
+              {/* Marketing Team */}
+              <div className="flex flex-col items-center">
+                <h3 className="text-lg font-semibold text-center mb-4 text-foreground">Marketing Team</h3>
+                <div className="space-y-4">
+                  {renderTeamCard({ 
+                    id: 'mkt-head', 
+                    name: 'Aditi Harinkhere', 
+                    role: 'Head',
+                    email: 'aditi.harinkhere@ecell.com',
+                    linkedin: 'https://linkedin.com/in/aditi-harinkhere'
+                  })}
+                  <div className="grid grid-cols-1 gap-3">
+                    {renderTeamCard({ 
+                      id: 'mkt-1', 
+                      name: 'Bhagyashree', 
+                      role: 'Marketing Team', 
+                      image: '/team/Camera-1231719718 - Mishu.jpg',
+                      email: 'bhagyashree@ecell.com',
+                      linkedin: 'https://linkedin.com/in/bhagyashree'
+                    })}
+                    {renderTeamCard({ 
+                      id: 'mkt-2', 
+                      name: 'Neha Sethiya', 
+                      role: 'Marketing Team', 
+                      image: '/team/20250709_234552 - Neha Sethiya.jpg',
+                      email: 'neha.sethiya@ecell.com',
+                      linkedin: 'https://linkedin.com/in/neha-sethiya'
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              {/* Content Creation Team */}
+              <div className="flex flex-col items-center">
+                <h3 className="text-lg font-semibold text-center mb-4 text-foreground">Content Creation Team</h3>
+                <div className="space-y-4">
+                  {renderTeamCard({ 
+                    id: 'content-head', 
+                    name: 'Shreya Shukla', 
+                    role: 'Head', 
+                    image: '/team/IMG_20250709_221727 - Shreya.jpg',
+                    email: 'shreya.shukla@ecell.com',
+                    linkedin: 'https://linkedin.com/in/shreya-shukla'
+                  })}
+                  <div className="grid grid-cols-1 gap-3">
+                    {renderTeamCard({ 
+                      id: 'content-1', 
+                      name: 'Shaikh Asad UI Hasan', 
+                      role: 'Videographer',
+                      email: 'asad.hasan@ecell.com',
+                      linkedin: 'https://linkedin.com/in/asad-hasan'
+                    })}
+                    {renderTeamCard({ 
+                      id: 'content-2', 
+                      name: 'Saloni Nema', 
+                      role: 'Photographer',
+                      email: 'saloni.nema@ecell.com',
+                      linkedin: 'https://linkedin.com/in/saloni-nema'
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              {/* Operation & Sponsorship Team */}
+              <div className="flex flex-col items-center">
+                <h3 className="text-lg font-semibold text-center mb-4 text-foreground">Operation & Sponsorship Team</h3>
+                <div className="space-y-4">
+                  {renderTeamCard({ 
+                    id: 'ops-head', 
+                    name: 'Nishtha Deshmukh', 
+                    role: 'Head', 
+                    image: '/team/IMG_20241228_194931_113 - Nishtha Deshmukh.jpg',
+                    email: 'nishtha.deshmukh@ecell.com',
+                    linkedin: 'https://linkedin.com/in/nishtha-deshmukh'
+                  })}
+                  <div className="grid grid-cols-1 gap-3">
+                    {renderTeamCard({ 
+                      id: 'ops-1', 
+                      name: 'Rewansh Vaidya', 
+                      role: 'Operation & Sponsorship Team',
+                      email: 'rewansh.vaidya@ecell.com',
+                      linkedin: 'https://linkedin.com/in/rewansh-vaidya'
+                    })}
+                    {renderTeamCard({ 
+                      id: 'ops-2', 
+                      name: 'Devansh Shrivastava', 
+                      role: 'Operation & Sponsorship Team',
+                      email: 'devansh.shrivastava@ecell.com',
+                      linkedin: 'https://linkedin.com/in/devansh-shrivastava'
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
