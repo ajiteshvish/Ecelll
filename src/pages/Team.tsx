@@ -339,27 +339,80 @@ const Team = () => {
     ]
   };
 
-  // Render organizational chart node
+  // Render team member card with theme styling
+  const renderTeamCard = (person: Person, isLeadership = false) => (
+    <Card key={person.id} className="group hover:shadow-xl transition-all duration-300 border border-border/50 bg-card/80 backdrop-blur-sm hover:bg-card/90">
+      <CardContent className="p-4 sm:p-6 text-center">
+        <div className="relative mb-4">
+          <div className={`mx-auto rounded-full border-2 border-primary/20 group-hover:border-primary/40 transition-colors duration-300 overflow-hidden ${
+            isLeadership ? 'w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28' : 'w-16 h-16 sm:w-18 sm:h-18 lg:w-20 lg:h-20'
+          }`}>
+            <img
+              src={person.image || '/placeholder.svg'}
+              alt={person.name}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                console.error(`Failed to load team image: ${person.image}`);
+                e.currentTarget.src = '/placeholder.svg';
+              }}
+              onLoad={() => {
+                console.log(`Successfully loaded team image: ${person.image}`);
+              }}
+            />
+          </div>
+          {/* Contact Icons - Show on hover */}
+          {(person.email || person.linkedin) && (
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 rounded-full">
+              <div className="flex gap-2">
+                {person.email && (
+                  <button
+                    onClick={() => window.open(`mailto:${person.email}`, '_blank')}
+                    className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors duration-200"
+                    title={`Email ${person.name}`}
+                  >
+                    <Mail className="h-4 w-4 text-white" />
+                  </button>
+                )}
+                {person.linkedin && (
+                  <button
+                    onClick={() => window.open(person.linkedin, '_blank')}
+                    className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors duration-200"
+                    title={`LinkedIn Profile`}
+                  >
+                    <Linkedin className="h-4 w-4 text-white" />
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+        <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-foreground mb-1">{person.name}</h3>
+        {person.role && <p className="text-xs sm:text-sm text-muted-foreground">{person.role}</p>}
+      </CardContent>
+    </Card>
+  );
+
+  // Render organizational chart node with theme styling
   const renderNode = (node: TeamNode) => {
     const getCardSize = (level: number) => {
       switch (level) {
-        case 1: return 'w-32 h-20'; // President
-        case 2: return 'w-28 h-16'; // VP, Secretary
-        case 3: return 'w-24 h-14'; // Treasurer, Executive
-        case 4: return 'w-20 h-12'; // Marketing Teams
-        case 5: return 'w-18 h-10'; // Roles
-        case 6: return 'w-16 h-8';  // Sub-roles
-        case 7: return 'w-14 h-6';  // Final roles
-        default: return 'w-16 h-8';
+        case 1: return 'w-40 h-24 sm:w-48 sm:h-28 lg:w-52 lg:h-32'; // President
+        case 2: return 'w-32 h-20 sm:w-36 sm:h-24 lg:w-40 lg:h-28'; // VP, Secretary
+        case 3: return 'w-28 h-16 sm:w-32 sm:h-20 lg:w-36 lg:h-24'; // Treasurer, Executive
+        case 4: return 'w-24 h-14 sm:w-28 sm:h-16 lg:w-32 lg:h-20'; // Marketing Teams
+        case 5: return 'w-20 h-12 sm:w-24 sm:h-14 lg:w-28 lg:h-16'; // Roles
+        case 6: return 'w-16 h-10 sm:w-20 sm:h-12 lg:w-24 lg:h-14'; // Sub-roles
+        case 7: return 'w-14 h-8 sm:w-16 sm:h-10 lg:w-20 lg:h-12'; // Final roles
+        default: return 'w-16 h-8 sm:w-18 sm:h-10 lg:w-20 lg:h-12';
       }
     };
 
     const getTextSize = (level: number) => {
       switch (level) {
-        case 1: return 'text-sm font-bold';
-        case 2: return 'text-xs font-semibold';
-        case 3: return 'text-xs font-medium';
-        case 4: return 'text-xs';
+        case 1: return 'text-sm sm:text-base lg:text-lg font-bold';
+        case 2: return 'text-xs sm:text-sm lg:text-base font-semibold';
+        case 3: return 'text-xs sm:text-sm font-medium';
+        case 4: return 'text-xs sm:text-sm';
         case 5: return 'text-xs';
         case 6: return 'text-xs';
         case 7: return 'text-xs';
@@ -370,37 +423,37 @@ const Team = () => {
     return (
       <div key={node.id} className="flex flex-col items-center">
         {/* Node Card */}
-        <div className={`${getCardSize(node.level)} bg-blue-100 border-2 border-blue-300 rounded-lg flex items-center justify-center text-center p-1 hover:bg-blue-200 transition-colors duration-200 group relative`}>
+        <div className={`${getCardSize(node.level)} bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/20 rounded-xl flex items-center justify-center text-center p-2 hover:from-primary/20 hover:to-primary/10 hover:border-primary/40 transition-all duration-300 group relative shadow-lg hover:shadow-xl`}>
           {node.person ? (
             <div className="w-full h-full flex flex-col items-center justify-center">
-              <span className={`${getTextSize(node.level)} text-blue-800 truncate w-full`}>
+              <span className={`${getTextSize(node.level)} text-foreground truncate w-full`}>
                 {node.person.name}
               </span>
               {node.level <= 3 && (
-                <span className="text-xs text-blue-600 truncate w-full">
+                <span className="text-xs sm:text-sm text-muted-foreground truncate w-full">
                   {node.person.role}
                 </span>
               )}
               {/* Contact Icons - Show on hover */}
               {(node.person.email || node.person.linkedin) && (
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-blue-500/20 rounded-lg">
-                  <div className="flex gap-1">
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 rounded-xl">
+                  <div className="flex gap-2">
                     {node.person.email && (
                       <button
                         onClick={() => window.open(`mailto:${node.person.email}`, '_blank')}
-                        className="p-1 bg-white/80 rounded-full hover:bg-white transition-colors duration-200"
+                        className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors duration-200"
                         title={`Email ${node.person.name}`}
                       >
-                        <Mail className="h-2 w-2 text-blue-600" />
+                        <Mail className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
                       </button>
                     )}
                     {node.person.linkedin && (
                       <button
                         onClick={() => window.open(node.person.linkedin, '_blank')}
-                        className="p-1 bg-white/80 rounded-full hover:bg-white transition-colors duration-200"
+                        className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors duration-200"
                         title={`LinkedIn Profile`}
                       >
-                        <Linkedin className="h-2 w-2 text-blue-600" />
+                        <Linkedin className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
                       </button>
                     )}
                   </div>
@@ -408,7 +461,7 @@ const Team = () => {
               )}
             </div>
           ) : (
-            <span className={`${getTextSize(node.level)} text-blue-800`}>
+            <span className={`${getTextSize(node.level)} text-foreground`}>
               {node.title}
             </span>
           )}
@@ -416,11 +469,11 @@ const Team = () => {
 
         {/* Children */}
         {node.children && node.children.length > 0 && (
-          <div className="mt-4 flex flex-wrap justify-center gap-4">
+          <div className="mt-6 sm:mt-8 flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8">
             {node.children.map((child) => (
               <div key={child.id} className="flex flex-col items-center">
                 {/* Connecting Line */}
-                <div className="w-px h-4 bg-blue-300 mb-2"></div>
+                <div className="w-px h-6 sm:h-8 bg-primary/30 mb-2"></div>
                 {renderNode(child)}
               </div>
             ))}
@@ -449,54 +502,234 @@ const Team = () => {
         {/* Organizational Chart */}
         <section className="py-8 sm:py-12 lg:py-16">
           <div className="container mx-auto px-3 sm:px-4 lg:px-6">
-            <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-12 border border-gray-200">
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-center mb-8 sm:mb-12 text-gray-800">
+            <div className="bg-card/50 backdrop-blur-sm rounded-2xl shadow-lg p-6 sm:p-8 lg:p-12 border border-border/50">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-center mb-8 sm:mb-12 text-foreground">
                 Organizational Structure
               </h2>
-              <div className="flex justify-center">
+              <div className="flex justify-center overflow-x-auto">
                 {renderNode(organizationalChart.children[0])}
               </div>
             </div>
           </div>
         </section>
 
-        {/* Team Members List */}
+        {/* Team Members Grid */}
         <section className="py-8 sm:py-12 lg:py-16 bg-muted/30">
           <div className="container mx-auto px-3 sm:px-4 lg:px-6">
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-center mb-8 sm:mb-12 text-foreground">
-              Team Members
+              Meet Our Team
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-              {[
-                { name: 'Sarvesh Kumar', role: 'President & Lead' },
-                { name: 'Vraddhi Srivastava', role: 'Vice President' },
-                { name: 'Shivam Mudgal', role: 'Secretary' },
-                { name: 'Adarsh Patidar', role: 'Treasurer' },
-                { name: 'Pooja Singh', role: 'Social Media Head' },
-                { name: 'Tanishka Shrivastava', role: 'Graphic Designer' },
-                { name: 'Khushi Jain', role: 'Graphic Designer' },
-                { name: 'Pushpendra Verma', role: 'Video Editor' },
-                { name: 'Ajitesh Vishwakarma', role: 'Technical Team' },
-                { name: 'Shourya Gupta', role: 'Technical Team' },
-                { name: 'Khushi Soni', role: 'Outreach & PR Team' },
-                { name: 'Shivam Kumar', role: 'Outreach & PR Team' },
-                { name: 'Ashish Sahu', role: 'Executive' },
-                { name: 'Harsh Gupta', role: 'Executive' },
-                { name: 'Tanu Agrawal', role: 'Logistic & Event Team' },
-                { name: 'Vedant Sah', role: 'Logistic & Event Team' },
-                { name: 'Aditi Harinkhere', role: 'Marketing Head' },
-                { name: 'Bhagyashree', role: 'Marketing Team' },
-                { name: 'Neha Sethiya', role: 'Marketing Team' },
-                { name: 'Shreya Shukla', role: 'Content Creator Head' },
-                { name: 'Saloni Nema', role: 'Photographer' },
-                { name: 'Nishtha Deshmukh', role: 'Operation & Sponsorship Head' },
-                { name: 'Devansh Shrivastava', role: 'Operation & Sponsorship Team' }
-              ].map((member, index) => (
-                <div key={index} className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200">
-                  <h3 className="font-semibold text-gray-800 mb-1">{member.name}</h3>
-                  <p className="text-sm text-gray-600">{member.role}</p>
-                </div>
-              ))}
+            
+            {/* Leadership Team */}
+            <div className="mb-12">
+              <h3 className="text-lg sm:text-xl font-semibold text-center mb-6 text-foreground">Leadership</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                {renderTeamCard({ 
+                  id: 'president', 
+                  name: 'Sarvesh Kumar', 
+                  role: 'President & Lead', 
+                  image: '/team/hero-bg.jpg',
+                  email: 'sarvesh.kumar@ecell.com',
+                  linkedin: 'https://linkedin.com/in/sarvesh-kumar'
+                }, true)}
+                {renderTeamCard({ 
+                  id: 'vp', 
+                  name: 'Vraddhi Srivastava', 
+                  role: 'Vice President',
+                  email: 'vraddhi.srivastava@ecell.com',
+                  linkedin: 'https://linkedin.com/in/vraddhi-srivastava'
+                }, true)}
+                {renderTeamCard({ 
+                  id: 'sec', 
+                  name: 'Shivam Mudgal', 
+                  role: 'Secretary', 
+                  image: '/team/20250830_111558_0000 - Shivam Mudgal.png',
+                  email: 'shivam.mudgal@ecell.com',
+                  linkedin: 'https://linkedin.com/in/shivam-mudgal'
+                }, true)}
+                {renderTeamCard({ 
+                  id: 'treasurer', 
+                  name: 'Adarsh Patidar', 
+                  role: 'Treasurer', 
+                  image: '/team/IMG-20231109-WA0026 - Adarsh Patidar.jpg',
+                  email: 'adarsh.patidar@ecell.com',
+                  linkedin: 'https://linkedin.com/in/adarsh-patidar'
+                }, true)}
+              </div>
+            </div>
+
+            {/* Team Heads */}
+            <div className="mb-12">
+              <h3 className="text-lg sm:text-xl font-semibold text-center mb-6 text-foreground">Team Heads</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                {renderTeamCard({ 
+                  id: 'sm-head', 
+                  name: 'Pooja Singh', 
+                  role: 'Social Media Head', 
+                  image: '/team/Screenshot_20250830-224455_Gallery - POOJA_ SINGH 10C.jpg',
+                  email: 'pooja.singh@ecell.com',
+                  linkedin: 'https://linkedin.com/in/pooja-singh'
+                })}
+                {renderTeamCard({ 
+                  id: 'mkt-head', 
+                  name: 'Aditi Harinkhere', 
+                  role: 'Marketing Head',
+                  email: 'aditi.harinkhere@ecell.com',
+                  linkedin: 'https://linkedin.com/in/aditi-harinkhere'
+                })}
+                {renderTeamCard({ 
+                  id: 'content-head', 
+                  name: 'Shreya Shukla', 
+                  role: 'Content Creator Head', 
+                  image: '/team/IMG_20250709_221727 - Shreya.jpg',
+                  email: 'shreya.shukla@ecell.com',
+                  linkedin: 'https://linkedin.com/in/shreya-shukla'
+                })}
+                {renderTeamCard({ 
+                  id: 'ops-head', 
+                  name: 'Nishtha Deshmukh', 
+                  role: 'Operation & Sponsorship Head', 
+                  image: '/team/IMG_20241228_194931_113 - Nishtha Deshmukh.jpg',
+                  email: 'nishtha.deshmukh@ecell.com',
+                  linkedin: 'https://linkedin.com/in/nishtha-deshmukh'
+                })}
+              </div>
+            </div>
+
+            {/* Team Members */}
+            <div>
+              <h3 className="text-lg sm:text-xl font-semibold text-center mb-6 text-foreground">Team Members</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+                {renderTeamCard({ 
+                  id: 'sm-1', 
+                  name: 'Tanishka Shrivastava', 
+                  role: 'Graphic Designer', 
+                  image: '/team/IMG20250709192629 - Tanishka Shrivastava.jpg',
+                  email: 'tanishka.shrivastava@ecell.com',
+                  linkedin: 'https://linkedin.com/in/tanishka-shrivastava'
+                })}
+                {renderTeamCard({ 
+                  id: 'sm-2', 
+                  name: 'Khushi Jain', 
+                  role: 'Graphic Designer', 
+                  image: '/team/20250709_215825 - khushi jain.jpg',
+                  email: 'khushi.jain@ecell.com',
+                  linkedin: 'https://linkedin.com/in/khushi-jain'
+                })}
+                {renderTeamCard({ 
+                  id: 'sm-3', 
+                  name: 'Pushpendra Verma', 
+                  role: 'Video Editor', 
+                  image: '/team/IMG_20250902_202245 - Satyam Verman.jpg',
+                  email: 'pushpendra.verma@ecell.com',
+                  linkedin: 'https://linkedin.com/in/pushpendra-verma'
+                })}
+                {renderTeamCard({ 
+                  id: 'tech-1', 
+                  name: 'Ajitesh Vishwakarma', 
+                  role: 'Technical Team', 
+                  image: '/team/IMG_20250607_141840.jpg',
+                  email: 'ajitesh.vishwakarma@ecell.com',
+                  linkedin: 'https://linkedin.com/in/ajitesh-vishwakarma'
+                })}
+                {renderTeamCard({ 
+                  id: 'tech-2', 
+                  name: 'Shourya Gupta', 
+                  role: 'Technical Team', 
+                  image: '/team/WhatsApp Image 2025-04-26 at 13.01.33_ee20a3cb - Shourya Gupta.jpg',
+                  email: 'shourya.gupta@ecell.com',
+                  linkedin: 'https://linkedin.com/in/shourya-gupta'
+                })}
+                {renderTeamCard({ 
+                  id: 'pr-1', 
+                  name: 'Khushi Soni', 
+                  role: 'Outreach & PR Team', 
+                  image: '/team/IMG-20250709-WA0065 - Khushi Soni.jpg',
+                  email: 'khushi.soni@ecell.com',
+                  linkedin: 'https://linkedin.com/in/khushi-soni'
+                })}
+                {renderTeamCard({ 
+                  id: 'pr-2', 
+                  name: 'Shivam Kumar', 
+                  role: 'Outreach & PR Team',
+                  email: 'shivam.kumar@ecell.com',
+                  linkedin: 'https://linkedin.com/in/shivam-kumar'
+                })}
+                {renderTeamCard({ 
+                  id: 'exec-1', 
+                  name: 'Ashish Sahu', 
+                  role: 'Executive', 
+                  image: '/team/1 - Ashish Sahu.png',
+                  email: 'ashish.sahu@ecell.com',
+                  linkedin: 'https://linkedin.com/in/ashish-sahu'
+                })}
+                {renderTeamCard({ 
+                  id: 'exec-2', 
+                  name: 'Harsh Gupta', 
+                  role: 'Executive', 
+                  image: '/team/IMG20250815164131 - Harsh Gupta.jpg',
+                  email: 'harsh.gupta@ecell.com',
+                  linkedin: 'https://linkedin.com/in/harsh-gupta'
+                })}
+                {renderTeamCard({ 
+                  id: 'log-1', 
+                  name: 'Tanu Agrawal', 
+                  role: 'Logistic & Event Team',
+                  email: 'tanu.agrawal@ecell.com',
+                  linkedin: 'https://linkedin.com/in/tanu-agrawal'
+                })}
+                {renderTeamCard({ 
+                  id: 'log-2', 
+                  name: 'Vedant Sah', 
+                  role: 'Logistic & Event Team',
+                  email: 'vedant.sah@ecell.com',
+                  linkedin: 'https://linkedin.com/in/vedant-sah'
+                })}
+                {renderTeamCard({ 
+                  id: 'mkt-1', 
+                  name: 'Bhagyashree', 
+                  role: 'Marketing Team', 
+                  image: '/team/Camera-1231719718 - Mishu.jpg',
+                  email: 'bhagyashree@ecell.com',
+                  linkedin: 'https://linkedin.com/in/bhagyashree'
+                })}
+                {renderTeamCard({ 
+                  id: 'mkt-2', 
+                  name: 'Neha Sethiya', 
+                  role: 'Marketing Team', 
+                  image: '/team/20250709_234552 - Neha Sethiya.jpg',
+                  email: 'neha.sethiya@ecell.com',
+                  linkedin: 'https://linkedin.com/in/neha-sethiya'
+                })}
+                {renderTeamCard({ 
+                  id: 'content-1', 
+                  name: 'Shaikh Asad UI Hasan', 
+                  role: 'Videographer',
+                  email: 'asad.hasan@ecell.com',
+                  linkedin: 'https://linkedin.com/in/asad-hasan'
+                })}
+                {renderTeamCard({ 
+                  id: 'content-2', 
+                  name: 'Saloni Nema', 
+                  role: 'Photographer',
+                  email: 'saloni.nema@ecell.com',
+                  linkedin: 'https://linkedin.com/in/saloni-nema'
+                })}
+                {renderTeamCard({ 
+                  id: 'ops-1', 
+                  name: 'Rewansh Vaidya', 
+                  role: 'Operation & Sponsorship Team',
+                  email: 'rewansh.vaidya@ecell.com',
+                  linkedin: 'https://linkedin.com/in/rewansh-vaidya'
+                })}
+                {renderTeamCard({ 
+                  id: 'ops-2', 
+                  name: 'Devansh Shrivastava', 
+                  role: 'Operation & Sponsorship Team',
+                  email: 'devansh.shrivastava@ecell.com',
+                  linkedin: 'https://linkedin.com/in/devansh-shrivastava'
+                })}
+              </div>
             </div>
           </div>
         </section>
