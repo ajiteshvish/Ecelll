@@ -341,8 +341,8 @@ const Team = () => {
 
   // Render team member card with theme styling
   const renderTeamCard = (person: Person, isLeadership = false) => (
-    <div key={person.id} className="group relative w-80 max-w-sm">
-      <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+    <div key={person.id} className="group relative w-full max-w-sm">
+      <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden h-full">
         {/* Image Section */}
         <div className="h-96 w-full overflow-hidden relative">
           <img
@@ -566,10 +566,11 @@ const Team = () => {
               </div>
             </div>
 
-            {/* Level 3 - All Teams (3-4 people per row for narrower cards) */}
+            {/* Level 3 - All Teams (4 people per row) */}
             <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24">
-              <div className="flex flex-wrap justify-center responsive-gap">
-              {/* All team members in one continuous grid */}
+              {/* First rows with full grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 responsive-gap justify-items-center">
+              {/* All team members except the last 2 */}
               {renderTeamCard({ 
                 id: 'treasurer', 
                 name: 'Treasurer - Adarsh Patidar', 
@@ -722,22 +723,30 @@ const Team = () => {
                 email: 'tanishka.shrivastava@ecell.com',
                 linkedin: 'https://linkedin.com/in/tanishka-shrivastava'
               })}
-              {renderTeamCard({ 
-                id: 'sm-2', 
-                name: 'Social Media - Khushi Jain', 
-                role: 'Graphic Designer', 
-                image: '/team/20250709_215825 - khushi jain.jpg',
-                email: 'khushi.jain@ecell.com',
-                linkedin: 'https://linkedin.com/in/khushi-jain'
-              })}
-              {renderTeamCard({ 
-                id: 'sm-3', 
-                name: 'Social Media - Pushpendra Verma', 
-                role: 'Video Editor', 
-                image: '/team/IMG_20250902_202245 - Satyam Verman.jpg',
-                email: 'pushpendra.verma@ecell.com',
-                linkedin: 'https://linkedin.com/in/pushpendra-verma'
-              })}
+              </div>
+              
+              {/* Last 2 cards centered */}
+              <div className="flex justify-center responsive-gap mt-8 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24">
+                <div className="w-72 sm:w-80 lg:w-72 xl:w-80">
+                  {renderTeamCard({ 
+                    id: 'sm-2', 
+                    name: 'Social Media - Khushi Jain', 
+                    role: 'Graphic Designer', 
+                    image: '/team/20250709_215825 - khushi jain.jpg',
+                    email: 'khushi.jain@ecell.com',
+                    linkedin: 'https://linkedin.com/in/khushi-jain'
+                  })}
+                </div>
+                <div className="w-72 sm:w-80 lg:w-72 xl:w-80">
+                  {renderTeamCard({ 
+                    id: 'sm-3', 
+                    name: 'Social Media - Pushpendra Verma', 
+                    role: 'Video Editor', 
+                    image: '/team/IMG_20250902_202245 - Satyam Verman.jpg',
+                    email: 'pushpendra.verma@ecell.com',
+                    linkedin: 'https://linkedin.com/in/pushpendra-verma'
+                  })}
+                </div>
               </div>
             </div>
           </div>
