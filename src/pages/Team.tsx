@@ -513,8 +513,8 @@ const Team = () => {
       <Navigation />
       <main className="pt-14 sm:pt-16 lg:pt-20">
         {/* Hero Section */}
-        <section className="py-8 sm:py-12 lg:py-16 bg-gradient-to-r from-primary/10 to-primary/5">
-          <div className="container mx-auto px-3 sm:px-4 lg:px-6 text-center">
+        <section className="responsive-section bg-gradient-to-r from-primary/10 to-primary/5">
+          <div className="responsive-container text-center">
             <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6">
               Our Team
             </h1>
@@ -525,14 +525,14 @@ const Team = () => {
         </section>
 
         {/* Team Hierarchy */}
-        <section className="py-8 sm:py-12 lg:py-16 bg-muted/30">
-          <div className="container mx-auto px-3 sm:px-4 lg:px-6">
+        <section className="responsive-section bg-muted/30">
+          <div className="responsive-container">
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-center mb-8 sm:mb-12 text-foreground">
               Meet Our Team
             </h2>
             
             {/* Level 1 - President */}
-            <div className="mb-12">
+            <div className="mb-8 sm:mb-12 md:mb-16 lg:mb-20 xl:mb-24">
               <div className="flex justify-center">
                 {renderTeamCard({ 
                   id: 'president', 
@@ -546,8 +546,8 @@ const Team = () => {
             </div>
 
             {/* Level 2 - VP and Secretary */}
-            <div className="mb-12">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+            <div className="mb-8 sm:mb-12 md:mb-16 lg:mb-20 xl:mb-24">
+              <div className="grid grid-cols-1 sm:grid-cols-2 responsive-gap max-w-4xl mx-auto">
                 {renderTeamCard({ 
                   id: 'vp', 
                   name: 'Vraddhi Srivastava', 
@@ -567,7 +567,8 @@ const Team = () => {
             </div>
 
             {/* Level 3 - All Teams (3-4 people per row for narrower cards) */}
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+            <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24">
+              <div className="flex flex-wrap justify-center responsive-gap">
               {/* All team members in one continuous grid */}
               {renderTeamCard({ 
                 id: 'treasurer', 
@@ -737,13 +738,14 @@ const Team = () => {
                 email: 'pushpendra.verma@ecell.com',
                 linkedin: 'https://linkedin.com/in/pushpendra-verma'
               })}
+              </div>
             </div>
           </div>
         </section>
 
         {/* Join Team Section */}
-        <section className="py-8 sm:py-12 lg:py-16">
-          <div className="container mx-auto px-3 sm:px-4 lg:px-6 text-center">
+        <section className="responsive-section">
+          <div className="responsive-container text-center">
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-4 sm:mb-6">
               Want to Join Our Team?
             </h2>

@@ -110,10 +110,10 @@ export const OurBlogs = () => {
   ];
 
   return (
-    <section className="py-12 sm:py-20 px-4 sm:px-6 relative overflow-hidden">
+    <section className="responsive-section relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5"></div>
       
-      <div className="container mx-auto relative z-10">
+      <div className="responsive-container relative z-10">
         <div className="text-center mb-16 animate-slide-up">
           <div className="relative inline-block mb-8">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-secondary/30 to-primary/30 blur-xl rounded-full animate-pulse"></div>
@@ -160,7 +160,7 @@ export const OurBlogs = () => {
           <div 
             ref={scrollContainerRef}
             onScroll={checkScrollButtons}
-            className="flex overflow-x-auto scrollbar-hide horizontal-scroll gap-4 sm:gap-6 pb-4 snap-x snap-mandatory px-4 sm:px-0"
+            className="flex overflow-x-auto scrollbar-hide horizontal-scroll responsive-gap pb-4 snap-x snap-mandatory"
           >
             {blogs.map((blog) => (
               <div key={blog.id} className="horizontal-card w-72 sm:w-80 md:w-96 flex-shrink-0">
@@ -201,7 +201,7 @@ export const OurBlogs = () => {
                   </div>
 
                   {/* Content Section */}
-                  <div className="p-3 sm:p-4 md:p-6">
+                  <div className="responsive-card-spacing">
                     {/* Author and Date */}
                     <div className="flex items-center justify-between text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3">
                       <div className="flex items-center">
