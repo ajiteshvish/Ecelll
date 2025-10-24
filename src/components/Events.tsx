@@ -34,7 +34,7 @@ export const Events = () => {
     }
   };
 
-  const handleEventClick = (event: any) => {
+  const handleEventClick = (event: { redirectTo?: string }) => {
     if (event.redirectTo) {
       navigate(event.redirectTo);
     }

@@ -13,7 +13,7 @@ const ESummit = () => {
   ];
 
   // Speakers placeholder for now
-  const speakers: any[] = [];
+  const speakers: { name: string; role: string; image?: string }[] = [];
 
   // Event images with their corresponding unstop links
   const eventImages = [

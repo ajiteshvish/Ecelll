@@ -125,4 +125,4 @@ export {
   NavigationMenuLink,
   NavigationMenuIndicator,
   NavigationMenuViewport,
-}
+} // eslint-disable-line react-refresh/only-export-components

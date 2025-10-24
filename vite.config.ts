@@ -6,9 +6,9 @@ import { componentTagger } from "lovable-tagger";
 // 🔧 PATCH: ensure crypto.getRandomValues works in Node
 import * as nodeCrypto from "crypto";
 if (!globalThis.crypto || typeof globalThis.crypto.getRandomValues !== "function") {
-  // @ts-ignore
+  // @ts-expect-error - Adding crypto polyfill for Node environment
   globalThis.crypto = {
-    getRandomValues: (arr: any) => nodeCrypto.randomBytes(arr.length)
+    getRandomValues: (arr: Uint8Array) => nodeCrypto.randomBytes(arr.length)
   };
 }
 
