@@ -1,7 +1,39 @@
 import { Card } from './ui/card';
-import { Calendar, MapPin, Users, Award } from 'lucide-react';
+import { Calendar, MapPin, Users, Award, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
 
 export const PastEvents = () => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScrollButtons = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+    }
+  };
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -320, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 320, behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    checkScrollButtons();
+    const handleResize = () => checkScrollButtons();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const pastEvents = [
     {
       id: 1,
@@ -74,8 +106,40 @@ export const PastEvents = () => {
         </div>
 
         {/* Mobile-Optimized Horizontal Scrollable Layout */}
-        <div className="scroll-container">
-          <div className="flex overflow-x-auto scrollbar-hide horizontal-scroll gap-4 sm:gap-6 pb-4 snap-x snap-mandatory px-4 sm:px-0">
+        <div className="scroll-container relative">
+          {/* Left Arrow Button */}
+          <button
+            onClick={scrollLeft}
+            disabled={!canScrollLeft}
+            className={`absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-white border border-gray-200 rounded-full p-2 shadow-lg transition-all duration-300 ${
+              canScrollLeft 
+                ? 'opacity-100 hover:scale-110' 
+                : 'opacity-50 cursor-not-allowed'
+            }`}
+            aria-label="Scroll left"
+          >
+            <ChevronLeft className="h-5 w-5 text-gray-700" />
+          </button>
+
+          {/* Right Arrow Button */}
+          <button
+            onClick={scrollRight}
+            disabled={!canScrollRight}
+            className={`absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-white/90 hover:bg-white border border-gray-200 rounded-full p-2 shadow-lg transition-all duration-300 ${
+              canScrollRight 
+                ? 'opacity-100 hover:scale-110' 
+                : 'opacity-50 cursor-not-allowed'
+            }`}
+            aria-label="Scroll right"
+          >
+            <ChevronRight className="h-5 w-5 text-gray-700" />
+          </button>
+
+          <div 
+            ref={scrollContainerRef}
+            onScroll={checkScrollButtons}
+            className="flex overflow-x-auto scrollbar-hide horizontal-scroll gap-4 sm:gap-6 pb-4 snap-x snap-mandatory px-4 sm:px-0"
+          >
             {pastEvents.map((event) => (
               <div key={event.id} className="horizontal-card w-72 sm:w-80 md:w-96 flex-shrink-0">
                 <Card className="group bg-card border border-border/60 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 h-full">

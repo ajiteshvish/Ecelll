@@ -341,82 +341,80 @@ const Team = () => {
 
   // Render team member card with theme styling
   const renderTeamCard = (person: Person, isLeadership = false) => (
-    <Card key={person.id} className="group hover:shadow-xl transition-all duration-300 border border-border/50 bg-card/60 backdrop-blur-sm overflow-hidden">
-      <div className="h-48 w-full overflow-hidden relative">
-        <img
-          src={person.image || '/placeholder.svg'}
-          alt={`${person.name} - Team Member`}
-          className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-          style={{
-            objectPosition: 'center center',
-            minHeight: '192px',
-            maxHeight: '192px'
-          }}
-          loading="lazy"
-          decoding="async"
-          onError={(e) => {
-            console.error(`Failed to load team image: ${person.image}`);
-            e.currentTarget.src = '/placeholder.svg';
-            e.currentTarget.alt = `${person.name} - Image not available`;
-          }}
-          onLoad={() => {
-            console.log(`Successfully loaded team image: ${person.image}`);
-          }}
-        />
-        {/* Fallback content for missing images */}
-        {!person.image && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20">
-            <div className="text-center">
-              <Users className="h-12 w-12 mx-auto text-primary/60 mb-2" />
-              <p className="text-sm text-primary/80 font-medium">{person.name}</p>
+    <div key={person.id} className="group relative w-80 max-w-sm">
+      <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+        {/* Image Section */}
+        <div className="h-96 w-full overflow-hidden relative">
+          <img
+            src={person.image || '/placeholder.svg'}
+            alt={`${person.name} - Team Member`}
+            className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+            style={{
+              objectPosition: 'center center',
+              minHeight: '384px',
+              maxHeight: '384px'
+            }}
+            loading="lazy"
+            decoding="async"
+            onError={(e) => {
+              console.error(`Failed to load team image: ${person.image}`);
+              e.currentTarget.src = '/placeholder.svg';
+              e.currentTarget.alt = `${person.name} - Image not available`;
+            }}
+            onLoad={() => {
+              console.log(`Successfully loaded team image: ${person.image}`);
+            }}
+          />
+          {/* Fallback content for missing images */}
+          {!person.image && (
+            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200">
+              <div className="text-center">
+                <Users className="h-12 w-12 mx-auto text-blue-400 mb-2" />
+                <p className="text-sm text-blue-600 font-medium">{person.name}</p>
+              </div>
             </div>
-          </div>
-        )}
-        {/* Overlay for better text readability if needed */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-      </div>
-      <div className="p-4 sm:p-5">
-        <div className="flex items-center space-x-3 mb-3">
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-full blur-sm opacity-40 group-hover:opacity-80 transition-opacity"></div>
-            <div className="relative p-2 rounded-full bg-gradient-to-r from-primary/20 to-secondary/20 text-primary">
-              <Users className="h-4 w-4" />
-            </div>
-          </div>
-          <h3 className="text-xl font-semibold text-foreground">
-            {person.name}
-          </h3>
+          )}
         </div>
-        {person.role && (
-          <p className="text-muted-foreground leading-relaxed">
-            {person.role}
-          </p>
-        )}
+        
+        {/* Dark overlay with text at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gray-800 bg-opacity-90 rounded-b-2xl p-4">
+          <div className="text-center">
+            {person.role && (
+              <p className="text-white text-sm font-medium uppercase tracking-wide mb-1">
+                {person.role}
+              </p>
+            )}
+            <h3 className="text-white text-lg font-semibold">
+              {person.name}
+            </h3>
+          </div>
+        </div>
+        
         {/* Contact Icons - Show on hover */}
         {(person.email || person.linkedin) && (
-          <div className="mt-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             {person.email && (
               <button
                 onClick={() => window.open(`mailto:${person.email}`, '_blank')}
-                className="p-2 bg-primary/10 hover:bg-primary/20 rounded-full transition-colors duration-200"
+                className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors duration-200"
                 title={`Email ${person.name}`}
               >
-                <Mail className="h-4 w-4 text-primary" />
+                <Mail className="h-4 w-4 text-white" />
               </button>
             )}
             {person.linkedin && (
               <button
                 onClick={() => window.open(person.linkedin, '_blank')}
-                className="p-2 bg-primary/10 hover:bg-primary/20 rounded-full transition-colors duration-200"
+                className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors duration-200"
                 title={`LinkedIn Profile`}
               >
-                <Linkedin className="h-4 w-4 text-primary" />
+                <Linkedin className="h-4 w-4 text-white" />
               </button>
             )}
           </div>
         )}
       </div>
-    </Card>
+    </div>
   );
 
   // Render organizational chart node with theme styling
@@ -569,7 +567,7 @@ const Team = () => {
             </div>
 
             {/* Level 3 - All Teams (3-4 people per row for narrower cards) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
               {/* All team members in one continuous grid */}
               {renderTeamCard({ 
                 id: 'treasurer', 
